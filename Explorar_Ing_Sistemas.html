@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explora Ingeniería de Sistemas</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1e40af;
+      --secondary: #0f172a;
+      --accent: #38bdf8;
+      --bg: #f4f7fb;
+      --white: #ffffff;
+      --text: #1f2937;
+      --muted: #64748b;
+      --success: #16a34a;
+      --warning: #f59e0b;
+      --radius: 18px;
+      --shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      min-height: 90vh;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(37, 99, 235, 0.92)),
+        url("https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1500&q=80");
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.18);
+      color: #e0f2fe;
+      border: 1px solid rgba(186, 230, 253, 0.4);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    header p {
+      font-size: 1.12rem;
+      max-width: 700px;
+      color: #dbeafe;
+      margin-bottom: 25px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      padding: 13px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.25s, background 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--secondary);
+      font-weight: bold;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-panel {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 28px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel h3 {
+      margin-bottom: 14px;
+      font-size: 1.35rem;
+    }
+
+    .hero-panel ul {
+      list-style: none;
+    }
+
+    .hero-panel li {
+      margin: 12px 0;
+      padding-left: 28px;
+      position: relative;
+      color: #e0f2fe;
+    }
+
+    .hero-panel li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    nav {
+      background: var(--white);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.08);
+    }
+
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 65px 20px;
+      max-width: 1150px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 35px;
+    }
+
+    .intro {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .intro strong {
+      color: var(--primary);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .stat {
+      background: #eff6ff;
+      border-radius: 16px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid #bfdbfe;
+    }
+
+    .stat h3 {
+      font-size: 1.8rem;
+      color: var(--primary);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 26px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(15, 23, 42, 0.16);
+    }
+
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-size: 1.18rem;
+    }
+
+    .icon {
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 10px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .timeline-item {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 18px;
+      align-items: center;
+      border-left: 6px solid var(--primary);
+    }
+
+    .semester {
+      background: var(--secondary);
+      color: var(--white);
+      text-align: center;
+      padding: 10px;
+      border-radius: 14px;
+      font-weight: bold;
+    }
+
+    .interactive-box {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    button {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 12px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+      transform: scale(1.04);
+    }
+
+    .secondary-button {
+      background: var(--secondary);
+    }
+
+    #resultado,
+    #resultadoQuiz {
+      margin-top: 20px;
+      background: #e0f2fe;
+      border-left: 5px solid var(--primary);
+      padding: 20px;
+      border-radius: 12px;
+      display: none;
+      text-align: left;
+    }
+
+    .quiz {
+      text-align: left;
+      margin-top: 25px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .question {
+      background: #f8fafc;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .question label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+
+    .project-box {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: var(--white);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+    }
+
+    .project-box h3 {
+      margin-top: 15px;
+      margin-bottom: 8px;
+      color: #bae6fd;
+    }
+
+    .project-box ul {
+      margin-left: 22px;
+      margin-top: 10px;
+    }
+
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      border-radius: 24px;
+      padding: 45px 25px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: var(--secondary);
+      color: var(--white);
+      text-align: center;
+      padding: 24px;
+      margin-top: 40px;
+    }
+
+    footer small {
+      color: #bfdbfe;
+    }
+
+    @media (max-width: 850px) {
+      .hero-content,
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        min-height: auto;
+        padding: 70px 20px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="inicio">
+    <div class="hero-content">
+      <div>
+        <h1>Explora Ingeniería de Sistemas</h1>
+        <p>
+          Una experiencia web para presentar el programa de Ingeniería de Sistemas, sus áreas de formación,
+          el perfil profesional y las oportunidades laborales que ofrece en el mundo tecnológico actual.
+        </p>
+        <div class="hero-buttons">
+          <a href="#aprendizaje" class="btn btn-primary">Explorar programa</a>
+          <a href="#interactivo" class="btn btn-outline">Hacer test rápido</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <h3>¿Qué encontrarás?</h3>
+        <ul>
+          <li>Áreas clave de formación del programa.</li>
+          <li>Ruta académica por etapas.</li>
+          <li>Campos laborales de un ingeniero de sistemas.</li>
+          <li>Interacción para identificar tu perfil tecnológico.</li>
+          <li>Mini test vocacional orientado a tecnología.</li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#programa">Programa</a>
+    <a href="#aprendizaje">Áreas</a>
+    <a href="#ruta">Ruta académica</a>
+    <a href="#laboral">Campo laboral</a>
+    <a href="#interactivo">Interacción</a>
+    <a href="#tecnico">Ficha técnica</a>
+  </nav>
+
+  <section id="programa">
+    <h2 class="section-title">Bienvenida al programa</h2>
+    <p class="section-subtitle">
+      Este producto fue diseñado como una herramienta digital para que futuros estudiantes conozcan de manera sencilla
+      y dinámica qué significa estudiar Ingeniería de Sistemas.
+    </p>
+
+    <div class="intro">
+      <div class="intro-grid">
+        <div>
+          <p>
+            La <strong>Ingeniería de Sistemas</strong> es una carrera orientada al análisis, diseño, desarrollo,
+            implementación y gestión de soluciones tecnológicas. Su propósito no es solamente programar, sino entender
+            problemas reales y transformarlos en sistemas útiles para personas, empresas y comunidades.
+          </p>
+          <br />
+          <p>
+            Un ingeniero de sistemas desarrolla competencias en programación, bases de datos, arquitectura de software,
+            redes, inteligencia artificial, seguridad informática, gestión de proyectos y pensamiento lógico. Por eso,
+            puede participar en proyectos de transformación digital, automatización de procesos y creación de plataformas tecnológicas.
+          </p>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>8+</h3>
+            <p>Áreas tecnológicas</p>
+          </div>
+          <div class="stat">
+            <h3>6</h3>
+            <p>Perfiles laborales</p>
+          </div>
+          <div class="stat">
+            <h3>1</h3>
+            <p>Test interactivo</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aprendizaje">
+    <h2 class="section-title">¿Qué se aprende?</h2>
+    <p class="section-subtitle">
+      Estas son algunas áreas que normalmente hacen parte de la formación de un estudiante de Ingeniería de Sistemas.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>Programación</h3>
+        <p>Diseño de algoritmos, estructuras de datos y construcción de aplicaciones usando lenguajes como Java, Python, JavaScript o C++.</p>
+        <span class="tag">Lógica + código</span>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧑‍💻</div>
+        <h3>Ingeniería de software</h3>
+        <p>Planeación, análisis de requerimientos, diseño, pruebas, documentación y mantenimiento de sistemas de información.</p>
+        <span class="tag">Proyectos reales</span>
+      </div>
+
+      <div class="card">
+        <div class="icon">🗄️</div>
+        <h3>Bases de datos</h3>
+        <p>Modelado, almacenamiento, consulta y administración de información mediante bases de datos relacionales y no relacionales.</p>
+        <span class="tag">SQL + datos</span>
+      </div>
+
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>Redes y sistemas distribuidos</h3>
+        <p>Comprensión de la comunicación entre dispositivos, servidores, servicios web, APIs y arquitecturas conectadas.</p>
+        <span class="tag">Conectividad</span>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Inteligencia artificial</h3>
+        <p>Aplicación de modelos y herramientas para automatizar tareas, analizar información y apoyar la toma de decisiones.</p>
+        <span class="tag">Innovación</span>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔐</div>
+        <h3>Ciberseguridad</h3>
+        <p>Protección de sistemas, redes, usuarios y datos frente a amenazas digitales, vulnerabilidades y ataques informáticos.</p>
+        <span class="tag">Protección digital</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="ruta">
+    <h2 class="section-title">Ruta académica</h2>
+    <p class="section-subtitle">
+      La formación puede verse como una ruta progresiva: primero se aprende la base lógica, luego se desarrollan sistemas
+      y finalmente se aplican conocimientos en proyectos más completos.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="semester">1° - 3°</div>
+        <div>
+          <h3>Fundamentos</h3>
+          <p>Matemáticas, lógica, algoritmos, programación básica, pensamiento computacional y fundamentos de sistemas.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="semester">4° - 6°</div>
+        <div>
+          <h3>Construcción de soluciones</h3>
+          <p>Bases de datos, programación avanzada, desarrollo web, sistemas operativos, redes e ingeniería de software.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="semester">7° - 8°</div>
+        <div>
+          <h3>Integración y especialización</h3>
+          <p>Arquitectura de software, seguridad, inteligencia artificial, gestión de proyectos, análisis de datos y soluciones empresariales.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="semester">9° - 10°</div>
+        <div>
+          <h3>Proyecto profesional</h3>
+          <p>Aplicación de conocimientos en prácticas, proyectos integradores, emprendimiento tecnológico o trabajo de grado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="laboral">
+    <h2 class="section-title">Campo laboral</h2>
+    <p class="section-subtitle">
+      Un egresado puede desempeñarse en diferentes áreas, dependiendo de sus intereses y habilidades técnicas.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">👨‍💻</div>
+        <h3>Desarrollador de software</h3>
+        <p>Construye aplicaciones web, móviles, de escritorio o sistemas empresariales.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Analista de datos</h3>
+        <p>Procesa e interpreta información para generar reportes, indicadores y apoyo a decisiones.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <h3>Especialista en ciberseguridad</h3>
+        <p>Evalúa riesgos, protege plataformas y ayuda a prevenir incidentes de seguridad.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📡</div>
+        <h3>Administrador de redes</h3>
+        <p>Gestiona infraestructura tecnológica, servidores, redes y servicios conectados.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Ingeniero de IA</h3>
+        <p>Diseña soluciones que integran automatización, aprendizaje automático y análisis inteligente.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚀</div>
+        <h3>Líder de proyectos TI</h3>
+        <p>Coordina equipos, tiempos, requerimientos y entregables en proyectos tecnológicos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="interactivo">
+    <h2 class="section-title">Explora tu perfil tecnológico</h2>
+    <div class="interactive-box">
+      <h3>Selecciona el área que más te llama la atención</h3>
+
+      <div class="buttons">
+        <button onclick="mostrarPerfil('apps')">Aplicaciones móviles</button>
+        <button onclick="mostrarPerfil('web')">Desarrollo web</button>
+        <button onclick="mostrarPerfil('ia')">Inteligencia artificial</button>
+        <button onclick="mostrarPerfil('datos')">Bases de datos</button>
+        <button onclick="mostrarPerfil('seguridad')">Ciberseguridad</button>
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="quiz">
+        <h3>Mini test vocacional</h3>
+        <p>Responde estas preguntas y obtén una orientación básica.</p>
+
+        <div class="question">
+          <strong>1. ¿Qué actividad te parece más interesante?</strong>
+          <label><input type="radio" name="q1" value="dev"> Crear aplicaciones o páginas web</label>
+          <label><input type="radio" name="q1" value="data"> Analizar datos y encontrar patrones</label>
+          <label><input type="radio" name="q1" value="sec"> Proteger sistemas y detectar riesgos</label>
+        </div>
+
+        <div class="question">
+          <strong>2. ¿Qué tipo de proyecto te gustaría desarrollar?</strong>
+          <label><input type="radio" name="q2" value="dev"> Una plataforma web para una empresa</label>
+          <label><input type="radio" name="q2" value="data"> Un tablero con estadísticas e indicadores</label>
+          <label><input type="radio" name="q2" value="sec"> Un sistema para mejorar la seguridad de usuarios</label>
+        </div>
+
+        <div class="question">
+          <strong>3. ¿Con qué frase te identificas más?</strong>
+          <label><input type="radio" name="q3" value="dev"> Me gusta construir soluciones visibles y funcionales</label>
+          <label><input type="radio" name="q3" value="data"> Me gusta entender la información y sacar conclusiones</label>
+          <label><input type="radio" name="q3" value="sec"> Me interesa prevenir errores, ataques y vulnerabilidades</label>
+        </div>
+
+        <button class="secondary-button" onclick="calcularQuiz()">Ver resultado del test</button>
+        <div id="resultadoQuiz"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta">
+      <h2>Ingeniería de Sistemas: tecnología con propósito</h2>
+      <p>
+        Estudiar Ingeniería de Sistemas permite desarrollar soluciones que impactan la vida diaria: aplicaciones,
+        plataformas, automatización, análisis de datos, seguridad y transformación digital. Es una carrera para quienes
+        quieren crear, resolver problemas.
+      </p>
+    </div>
+  </section>
+
+
+  <script>
+    function mostrarPerfil(opcion) {
+      const resultado = document.getElementById('resultado');
+      let texto = '';
+
+      const perfiles = {
+        apps: {
+          titulo: 'Perfil: Desarrollador móvil',
+          descripcion: 'Si te interesa crear aplicaciones móviles, Ingeniería de Sistemas te permite aprender sobre diseño de interfaces, lógica de programación, consumo de APIs, bases de datos y experiencia de usuario.',
+          recomendacion: 'Ruta recomendada: programación, desarrollo móvil, bases de datos e ingeniería de software.'
+        },
+        web: {
+          titulo: 'Perfil: Desarrollador web',
+          descripcion: 'Si te gustan las páginas web, puedes enfocarte en frontend, backend, bases de datos, despliegue de aplicaciones y construcción de plataformas completas.',
+          recomendacion: 'Ruta recomendada: HTML, CSS, JavaScript, frameworks web, backend y bases de datos.'
+        },
+        ia: {
+          titulo: 'Perfil: Innovador en inteligencia artificial',
+          descripcion: 'Si te llama la atención la IA, puedes aprender a trabajar con datos, modelos predictivos, automatización, aprendizaje automático y herramientas inteligentes.',
+          recomendacion: 'Ruta recomendada: matemáticas, Python, análisis de datos, machine learning e inteligencia artificial.'
+        },
+        datos: {
+          titulo: 'Perfil: Analista de datos',
+          descripcion: 'Si te interesa organizar e interpretar información, puedes trabajar con bases de datos, reportes, visualización de datos e indicadores para la toma de decisiones.',
+          recomendacion: 'Ruta recomendada: SQL, bases de datos, estadística, dashboards y analítica de datos.'
+        },
+        seguridad: {
+          titulo: 'Perfil: Especialista en ciberseguridad',
+          descripcion: 'Si te interesa proteger sistemas, puedes estudiar redes, seguridad informática, análisis de vulnerabilidades, gestión de riesgos y buenas prácticas de protección digital.',
+          recomendacion: 'Ruta recomendada: redes, sistemas operativos, seguridad informática, pruebas de vulnerabilidad y gestión de riesgos.'
+        }
+      };
+
+      texto = `
+        <strong>${perfiles[opcion].titulo}</strong><br><br>
+        ${perfiles[opcion].descripcion}<br><br>
+        <em>${perfiles[opcion].recomendacion}</em>
+      `;
+
+      resultado.innerHTML = texto;
+      resultado.style.display = 'block';
+    }
+
+    function calcularQuiz() {
+      const respuestas = [
+        document.querySelector('input[name="q1"]:checked'),
+        document.querySelector('input[name="q2"]:checked'),
+        document.querySelector('input[name="q3"]:checked')
+      ];
+
+      const resultadoQuiz = document.getElementById('resultadoQuiz');
+
+      if (respuestas.includes(null)) {
+        resultadoQuiz.innerHTML = '<strong>Faltan respuestas.</strong><br>Por favor responde las tres preguntas para calcular tu perfil.';
+        resultadoQuiz.style.display = 'block';
+        return;
+      }
+
+      const puntaje = {
+        dev: 0,
+        data: 0,
+        sec: 0
+      };
+
+      respuestas.forEach(respuesta => {
+        puntaje[respuesta.value]++;
+      });
+
+      let perfil = '';
+
+      if (puntaje.dev >= puntaje.data && puntaje.dev >= puntaje.sec) {
+        perfil = `
+          <strong>Resultado: perfil orientado al desarrollo de software.</strong><br>
+          Te interesan la construcción de aplicaciones, la programación y el diseño de soluciones funcionales.
+          En Ingeniería de Sistemas podrías enfocarte en desarrollo web, móvil o ingeniería de software.
+        `;
+      } else if (puntaje.data >= puntaje.dev && puntaje.data >= puntaje.sec) {
+        perfil = `
+          <strong>Resultado: perfil orientado a datos e inteligencia artificial.</strong><br>
+          Te interesa analizar información, encontrar patrones y generar conocimiento a partir de datos.
+          Podrías enfocarte en bases de datos, analítica, machine learning o inteligencia artificial.
+        `;
+      } else {
+        perfil = `
+          <strong>Resultado: perfil orientado a ciberseguridad.</strong><br>
+          Te interesa proteger sistemas, prevenir amenazas y analizar riesgos tecnológicos.
+          Podrías enfocarte en redes, seguridad informática, auditoría o gestión de riesgos digitales.
+        `;
+      }
+
+      resultadoQuiz.innerHTML = perfil;
+      resultadoQuiz.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
