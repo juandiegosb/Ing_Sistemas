@@ -239,34 +239,94 @@
       </div>
 
       <div id="resultado"></div>
+        <div class="quiz">
+  <h3>Test vocacional tecnológico</h3>
+  <p>
+    Responde las siguientes preguntas y descubre qué perfil de Ingeniería de Sistemas se acerca más a tus intereses.
+  </p>
 
-      <div class="quiz">
-        <h3>Mini test vocacional</h3>
-        <p>Responde estas preguntas y obtén una orientación básica.</p>
+  <div class="question">
+    <strong>1. ¿Qué actividad te llama más la atención?</strong>
+    <label><input type="radio" name="q1" value="dev"> Crear aplicaciones, páginas web o sistemas</label>
+    <label><input type="radio" name="q1" value="data"> Analizar datos y encontrar patrones</label>
+    <label><input type="radio" name="q1" value="sec"> Proteger sistemas frente a ataques</label>
+    <label><input type="radio" name="q1" value="redes"> Configurar redes, servidores o servicios</label>
+    <label><input type="radio" name="q1" value="gestion"> Liderar equipos y organizar proyectos</label>
+  </div>
 
-        <div class="question">
-          <strong>1. ¿Qué actividad te parece más interesante?</strong>
-          <label><input type="radio" name="q1" value="dev"> Crear aplicaciones o páginas web</label>
-          <label><input type="radio" name="q1" value="data"> Analizar datos y encontrar patrones</label>
-          <label><input type="radio" name="q1" value="sec"> Proteger sistemas y detectar riesgos</label>
-        </div>
+  <div class="question">
+    <strong>2. Si una empresa tiene un problema, ¿cuál te gustaría resolver?</strong>
+    <label><input type="radio" name="q2" value="dev"> Crear una plataforma para automatizar procesos</label>
+    <label><input type="radio" name="q2" value="data"> Crear reportes para tomar mejores decisiones</label>
+    <label><input type="radio" name="q2" value="sec"> Evitar robo de información o accesos no autorizados</label>
+    <label><input type="radio" name="q2" value="redes"> Mejorar la conexión entre sedes y servidores</label>
+    <label><input type="radio" name="q2" value="gestion"> Planear tiempos, tareas y entregas del proyecto</label>
+  </div>
 
-        <div class="question">
-          <strong>2. ¿Qué tipo de proyecto te gustaría desarrollar?</strong>
-          <label><input type="radio" name="q2" value="dev"> Una plataforma web para una empresa</label>
-          <label><input type="radio" name="q2" value="data"> Un tablero con estadísticas e indicadores</label>
-          <label><input type="radio" name="q2" value="sec"> Un sistema para mejorar la seguridad de usuarios</label>
-        </div>
+  <div class="question">
+    <strong>3. ¿Qué tipo de proyecto te gustaría presentar?</strong>
+    <label><input type="radio" name="q3" value="dev"> Una app móvil o una página web funcional</label>
+    <label><input type="radio" name="q3" value="data"> Un dashboard con gráficas e indicadores</label>
+    <label><input type="radio" name="q3" value="sec"> Un sistema de login más seguro</label>
+    <label><input type="radio" name="q3" value="redes"> Una red o infraestructura simulada</label>
+    <label><input type="radio" name="q3" value="gestion"> Una propuesta completa de solución tecnológica</label>
+  </div>
 
-        <div class="question">
-          <strong>3. ¿Con qué frase te identificas más?</strong>
-          <label><input type="radio" name="q3" value="dev"> Me gusta construir soluciones visibles y funcionales</label>
-          <label><input type="radio" name="q3" value="data"> Me gusta entender la información y sacar conclusiones</label>
-          <label><input type="radio" name="q3" value="sec"> Me interesa prevenir errores, ataques y vulnerabilidades</label>
-        </div>
+  <div class="question">
+    <strong>4. ¿Con cuál frase te identificas más?</strong>
+    <label><input type="radio" name="q4" value="dev"> Me gusta construir cosas que los usuarios puedan usar</label>
+    <label><input type="radio" name="q4" value="data"> Me gusta entender información y sacar conclusiones</label>
+    <label><input type="radio" name="q4" value="sec"> Me gusta prevenir errores, riesgos y ataques</label>
+    <label><input type="radio" name="q4" value="redes"> Me interesa cómo se conectan los sistemas</label>
+    <label><input type="radio" name="q4" value="gestion"> Me gusta coordinar personas, ideas y entregas</label>
+  </div>
 
-        <button class="secondary-button" onclick="calcularQuiz()">Ver resultado del test</button>
-        <div id="resultadoQuiz"></div>
+  <div class="question">
+    <strong>5. ¿Qué materia te parecería más interesante?</strong>
+    <label><input type="radio" name="q5" value="dev"> Programación o desarrollo web</label>
+    <label><input type="radio" name="q5" value="data"> Bases de datos o inteligencia artificial</label>
+    <label><input type="radio" name="q5" value="sec"> Seguridad informática</label>
+    <label><input type="radio" name="q5" value="redes"> Redes y sistemas operativos</label>
+    <label><input type="radio" name="q5" value="gestion"> Ingeniería de software o gestión de proyectos</label>
+  </div>
+
+  <div class="question">
+    <strong>6. En un equipo de trabajo, normalmente prefieres:</strong>
+    <label><input type="radio" name="q6" value="dev"> Programar la solución</label>
+    <label><input type="radio" name="q6" value="data"> Organizar y analizar la información</label>
+    <label><input type="radio" name="q6" value="sec"> Revisar si hay fallas o riesgos</label>
+    <label><input type="radio" name="q6" value="redes"> Configurar herramientas o servicios técnicos</label>
+    <label><input type="radio" name="q6" value="gestion"> Repartir tareas y controlar avances</label>
+  </div>
+
+  <div class="question">
+    <strong>7. ¿Qué problema de la vida real te gustaría solucionar?</strong>
+    <label><input type="radio" name="q7" value="dev"> Una app para mejorar la atención de usuarios</label>
+    <label><input type="radio" name="q7" value="data"> Un sistema para analizar ventas o rendimiento</label>
+    <label><input type="radio" name="q7" value="sec"> Evitar fraudes o robo de cuentas</label>
+    <label><input type="radio" name="q7" value="redes"> Mejorar la conectividad de una empresa</label>
+    <label><input type="radio" name="q7" value="gestion"> Digitalizar un proceso de una organización</label>
+  </div>
+
+  <div class="question">
+    <strong>8. ¿Qué herramienta te gustaría aprender más?</strong>
+    <label><input type="radio" name="q8" value="dev"> JavaScript, React, Java o Python para crear software</label>
+    <label><input type="radio" name="q8" value="data"> SQL, Power BI, Python o herramientas de IA</label>
+    <label><input type="radio" name="q8" value="sec"> Kali Linux, análisis de vulnerabilidades o buenas prácticas de seguridad</label>
+    <label><input type="radio" name="q8" value="redes"> Cisco Packet Tracer, Linux, servidores o cloud</label>
+    <label><input type="radio" name="q8" value="gestion"> Jira, Scrum, documentación y planeación de proyectos</label>
+  </div>
+
+  <button class="secondary-button" onclick="calcularQuiz()">Ver resultado del test</button>
+  <div id="resultadoQuiz"></div>
+</div>
+
+<div id="modalResultado" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="cerrarModalResultado()">×</button>
+    <div id="contenidoModalResultado"></div>
+  </div>
+</div>
       </div>
     </div>
   </section>
