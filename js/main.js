@@ -41,52 +41,188 @@ function mostrarPerfil(opcion) {
     }
 
     function calcularQuiz() {
-      const respuestas = [
-        document.querySelector('input[name="q1"]:checked'),
-        document.querySelector('input[name="q2"]:checked'),
-        document.querySelector('input[name="q3"]:checked')
-      ];
+  const totalPreguntas = 8;
 
-      const resultadoQuiz = document.getElementById('resultadoQuiz');
-
-      if (respuestas.includes(null)) {
-        resultadoQuiz.innerHTML = '<strong>Faltan respuestas.</strong><br>Por favor responde las tres preguntas para calcular tu perfil.';
-        resultadoQuiz.style.display = 'block';
-        return;
-      }
-
-      const puntaje = {
-        dev: 0,
-        data: 0,
-        sec: 0
-      };
-
-      respuestas.forEach(respuesta => {
-        puntaje[respuesta.value]++;
-      });
-
-      let perfil = '';
-
-      if (puntaje.dev >= puntaje.data && puntaje.dev >= puntaje.sec) {
-        perfil = `
-          <strong>Resultado: perfil orientado al desarrollo de software.</strong><br>
-          Te interesan la construcción de aplicaciones, la programación y el diseño de soluciones funcionales.
-          En Ingeniería de Sistemas podrías enfocarte en desarrollo web, móvil o ingeniería de software.
-        `;
-      } else if (puntaje.data >= puntaje.dev && puntaje.data >= puntaje.sec) {
-        perfil = `
-          <strong>Resultado: perfil orientado a datos e inteligencia artificial.</strong><br>
-          Te interesa analizar información, encontrar patrones y generar conocimiento a partir de datos.
-          Podrías enfocarte en bases de datos, analítica, machine learning o inteligencia artificial.
-        `;
-      } else {
-        perfil = `
-          <strong>Resultado: perfil orientado a ciberseguridad.</strong><br>
-          Te interesa proteger sistemas, prevenir amenazas y analizar riesgos tecnológicos.
-          Podrías enfocarte en redes, seguridad informática, auditoría o gestión de riesgos digitales.
-        `;
-      }
-
-      resultadoQuiz.innerHTML = perfil;
-      resultadoQuiz.style.display = 'block';
+  const perfiles = {
+    dev: {
+      nombre: "Desarrollo de software",
+      titulo: "Perfil orientado al desarrollo de software",
+      descripcion:
+        "Te interesa crear aplicaciones, páginas web, sistemas y soluciones funcionales para usuarios reales.",
+      ruta:
+        "Ruta recomendada: programación, desarrollo web, aplicaciones móviles, bases de datos e ingeniería de software.",
+      roles: ["Desarrollador web", "Desarrollador móvil", "Ingeniero de software", "Programador backend"]
+    },
+    data: {
+      nombre: "Datos e inteligencia artificial",
+      titulo: "Perfil orientado a datos e inteligencia artificial",
+      descripcion:
+        "Te interesa analizar información, encontrar patrones, crear reportes y apoyar decisiones usando datos.",
+      ruta:
+        "Ruta recomendada: bases de datos, SQL, estadística, visualización de datos, Python e inteligencia artificial.",
+      roles: ["Analista de datos", "Ingeniero de datos", "Analista BI", "Desarrollador de IA"]
+    },
+    sec: {
+      nombre: "Ciberseguridad",
+      titulo: "Perfil orientado a ciberseguridad",
+      descripcion:
+        "Te interesa proteger sistemas, prevenir ataques, analizar riesgos y cuidar la información de usuarios y empresas.",
+      ruta:
+        "Ruta recomendada: redes, sistemas operativos, seguridad informática, análisis de vulnerabilidades y gestión de riesgos.",
+      roles: ["Analista de seguridad", "Especialista en ciberseguridad", "Auditor TI", "Administrador de seguridad"]
+    },
+    redes: {
+      nombre: "Redes e infraestructura",
+      titulo: "Perfil orientado a redes e infraestructura",
+      descripcion:
+        "Te interesa entender cómo se conectan los sistemas, cómo funcionan los servidores, las redes y los servicios tecnológicos.",
+      ruta:
+        "Ruta recomendada: redes, sistemas operativos, cloud computing, servidores, infraestructura y servicios distribuidos.",
+      roles: ["Administrador de redes", "Soporte de infraestructura", "Administrador de servidores", "Ingeniero cloud"]
+    },
+    gestion: {
+      nombre: "Gestión de proyectos tecnológicos",
+      titulo: "Perfil orientado a gestión de proyectos TI",
+      descripcion:
+        "Te interesa organizar equipos, levantar requerimientos, planear entregas y convertir necesidades en soluciones tecnológicas.",
+      ruta:
+        "Ruta recomendada: ingeniería de software, metodologías ágiles, gestión de proyectos, análisis de requerimientos y liderazgo TI.",
+      roles: ["Líder de proyectos TI", "Scrum Master", "Analista funcional", "Product Owner"]
     }
+  };
+
+  const puntaje = {
+    dev: 0,
+    data: 0,
+    sec: 0,
+    redes: 0,
+    gestion: 0
+  };
+
+  const respuestas = [];
+
+  for (let i = 1; i <= totalPreguntas; i++) {
+    const respuesta = document.querySelector(`input[name="q${i}"]:checked`);
+
+    if (!respuesta) {
+      const resultadoQuiz = document.getElementById("resultadoQuiz");
+      resultadoQuiz.innerHTML = `
+        <strong>Faltan respuestas.</strong><br>
+        Por favor responde la pregunta ${i} para calcular tu perfil.
+      `;
+      resultadoQuiz.style.display = "block";
+      return;
+    }
+
+    puntaje[respuesta.value]++;
+
+    respuestas.push({
+      pregunta: i,
+      perfil: respuesta.value,
+      texto: respuesta.parentElement.textContent.trim()
+    });
+  }
+
+  const perfilesOrdenados = Object.entries(puntaje).sort((a, b) => b[1] - a[1]);
+  const perfilGanador = perfilesOrdenados[0][0];
+  const puntosGanador = perfilesOrdenados[0][1];
+  const porcentajeGanador = Math.round((puntosGanador / totalPreguntas) * 100);
+
+  const empate = perfilesOrdenados.filter(item => item[1] === puntosGanador);
+
+  let mensajeEmpate = "";
+  if (empate.length > 1) {
+    mensajeEmpate = `
+      <p>
+        <strong>Nota:</strong> hubo un empate entre varios perfiles. 
+        Se muestra como principal <strong>${perfiles[perfilGanador].nombre}</strong>, 
+        pero también tienes afinidad con:
+        ${empate.map(item => perfiles[item[0]].nombre).join(", ")}.
+      </p>
+    `;
+  }
+
+  const barras = Object.entries(puntaje)
+    .map(([clave, valor]) => {
+      const porcentaje = Math.round((valor / totalPreguntas) * 100);
+
+      return `
+        <div class="barra-item">
+          <div class="barra-header">
+            <span>${perfiles[clave].nombre}</span>
+            <span>${valor}/${totalPreguntas} respuestas - ${porcentaje}%</span>
+          </div>
+          <div class="barra-fondo">
+            <div class="barra-progreso" style="width: ${porcentaje}%"></div>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+
+  const razones = respuestas
+    .filter(respuesta => respuesta.perfil === perfilGanador)
+    .map(respuesta => `<li>Pregunta ${respuesta.pregunta}: ${respuesta.texto}</li>`)
+    .join("");
+
+  const roles = perfiles[perfilGanador].roles
+    .map(rol => `<span class="tag">${rol}</span>`)
+    .join(" ");
+
+  const contenido = `
+    <h2>Resultado del test vocacional</h2>
+
+    <div class="resultado-principal">
+      <h3>${perfiles[perfilGanador].titulo}</h3>
+      <p>${perfiles[perfilGanador].descripcion}</p>
+      <br>
+      <p><strong>Coincidencia principal:</strong> ${porcentajeGanador}%</p>
+      <p><strong>${perfiles[perfilGanador].ruta}</strong></p>
+    </div>
+
+    ${mensajeEmpate}
+
+    <h3>¿Por qué se calculó así?</h3>
+    <div class="explicacion-calculo">
+      <p>
+        El sistema revisó tus ${totalPreguntas} respuestas. Cada respuesta suma 1 punto al perfil relacionado.
+        El perfil con más puntos fue <strong>${perfiles[perfilGanador].nombre}</strong>, 
+        con <strong>${puntosGanador}</strong> de <strong>${totalPreguntas}</strong> respuestas.
+      </p>
+
+      <ul>
+        ${razones}
+      </ul>
+    </div>
+
+    <h3 style="margin-top: 22px;">Distribución de tus respuestas</h3>
+    <div class="barras-perfil">
+      ${barras}
+    </div>
+
+    <h3 style="margin-top: 22px;">Roles relacionados</h3>
+    <div class="buttons" style="justify-content: flex-start; margin-top: 12px;">
+      ${roles}
+    </div>
+  `;
+
+  document.getElementById("contenidoModalResultado").innerHTML = contenido;
+  document.getElementById("modalResultado").classList.add("active");
+
+  const resultadoQuiz = document.getElementById("resultadoQuiz");
+  resultadoQuiz.innerHTML = `
+    <strong>Resultado generado:</strong> ${perfiles[perfilGanador].nombre}. 
+    Se abrió una ventana emergente con la explicación completa.
+  `;
+  resultadoQuiz.style.display = "block";
+}
+
+function cerrarModalResultado() {
+  document.getElementById("modalResultado").classList.remove("active");
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    cerrarModalResultado();
+  }
+});
