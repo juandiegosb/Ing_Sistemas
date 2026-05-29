@@ -51,6 +51,16 @@ header {
   align-items: center;
 }
 
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+}
+
 .badge {
   display: inline-block;
   background: rgba(193, 18, 31, 0.22);
